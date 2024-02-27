@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "HomeCooked",
-    "slug": "HomeCooked",
+    "slug": "homecooked",
+    "scheme": "homecooked",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brendanr.izu.homecooked"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +27,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e2a6a5a4-1195-485f-bc06-0fbce77b9c94"
+      }
+    },
+    "owner": "brendanr.izu"
   }
 }
