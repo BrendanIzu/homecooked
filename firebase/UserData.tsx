@@ -46,6 +46,10 @@ export const populateRootUser = async () => {
   });
 }
 
+export const clearRootUser = async () => {
+  AsyncStorage.clear();
+}
+
 export const getUserFromId = async (id: string) => {
   const usersRef = collection(FIRESTORE_DB, 'users');
   const userDoc = doc(usersRef, id);

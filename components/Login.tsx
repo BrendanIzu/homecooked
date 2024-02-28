@@ -15,8 +15,8 @@ export const Login = () => {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [displayname, setDisplayname] = useState('');
-  const [email, setEmail] = useState('izububs4444@gmail.com');
-  const [password, setPassword] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   
   const SignIn = async () => {
@@ -49,7 +49,6 @@ export const Login = () => {
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user && user.email) {
-        console.log('yes');
         AsyncStorage.setItem('email', user.email);
         fetchUser();
       }

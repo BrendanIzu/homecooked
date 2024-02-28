@@ -11,6 +11,7 @@ import { router } from 'expo-router';
 import { FIREBASE_AUTH, FIREBASE_STORAGE, FIRESTORE_DB } from '../../../firebase/firebaseConfig';
 import { PostData, getUserPosts } from '../../../firebase/PostData';
 import { MyButton } from '../../../components/MyButton';
+import { clearRootUser } from '../../../firebase/UserData';
 
 export default function Profile() {
   const [pfp, setPfp] = useState('');
@@ -88,9 +89,14 @@ export default function Profile() {
       setPosts(response);
     }
   }
+  
+  const handleLogout = async () => {
+    await clearRootUser();
+  }
 
-  const logout = () => {
+  const logout = async () => {
     signOut(FIREBASE_AUTH).then(() => {
+      handleLogout();
       router.replace('');
     }).catch((error) => {
       console.log(error);

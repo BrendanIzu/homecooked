@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { DocumentData, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { DocumentData, Timestamp, collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore"
 import { FIRESTORE_DB } from "./firebaseConfig"
 
 export interface PostData {
@@ -30,7 +30,7 @@ const mapData = (doc: DocumentData) => {
 // get all posts associated with given userid
 export const getUserPosts = async (id: string) => {
   const postsRef = collection(FIRESTORE_DB, 'posts');
-  const q = query(postsRef, where('userid', '==', id));
+  const q = query(postsRef, where('userid', '==', id), orderBy('timestamp', 'desc'));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map(mapData);
 }
@@ -42,8 +42,9 @@ export const getFeedPosts = async () => {
     
     if (following.length > 0) {
       const postsRef = collection(FIRESTORE_DB, 'posts');
-      const q = query(postsRef, where('userid', 'in', following));
+      const q = query(postsRef, where('userid', 'in', following), orderBy('timestamp', 'desc'));
       const querySnapshot = await getDocs(q); ;
+      
       const res = querySnapshot.docs.map(mapData)
       return res.length > 0 ? res : [];
     }

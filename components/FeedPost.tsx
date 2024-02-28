@@ -35,7 +35,7 @@ export const FeedPost = ({ comments, description, id, imageUrl, likes, stack, ti
           <Image style={styles.image} source={{uri: imageUrl}}/>
         </View>
         
-        <FeedPostInteraction/>
+        {/* <FeedPostInteraction/> */}
         {/* <Pressable onPress={handlePress}><Text>more details</Text></Pressable> */}
         
         <View style={styles.description}> 

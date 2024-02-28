@@ -54,7 +54,7 @@ export default function CreatePost() {
       }, () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadUrl) => {
           setImageUri('');
-          saveRecord(fileType, downloadUrl, new Date().getTime().toString());
+          saveRecord(fileType, downloadUrl);
         })
       }
     )
@@ -66,17 +66,17 @@ export default function CreatePost() {
       return
     }
     uploadPost(imageUri, 'image');
-    router.replace('/Feed')
+    router.replace('./feed')
   }
   
-  const saveRecord = async (fileType: string, url: string, createdAt: string ) => {
-    const user = await AsyncStorage.getItem('user');
+  const saveRecord = async (fileType: string, url: string) => {
+    const userid = await AsyncStorage.getItem('userid');
     const response = await addDoc(collection(FIRESTORE_DB, "posts"), {
-      userid: user,
+      userid: userid,
       title: title,
       description: description,
       imageurl: url,
-      timestamp: createdAt,
+      timestamp: new Date().getTime().toString(),
       comments: [],
       likes: 0,
     })
